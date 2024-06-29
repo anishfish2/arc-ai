@@ -6,37 +6,15 @@ import torch
 import copy
 
 
-# Evaluation
-def evaluate_model(model, data):
-    correct = 0
-    total = 0
-    with torch.no_grad():
-        for i in range(len(data)):
-            input_data = torch.tensor(data['standardized_input'].iloc[i]).unsqueeze(0).float()
-            output_data = torch.tensor(data['standardized_output'].iloc[i]).float()
-            output = model(input_data)
-            _, predicted = torch.max(output.data, 1)
-            total += output_data.size(0)
-            correct += (predicted == output_data).sum().item()
-    print(f"Accuracy: {correct / total}")
-
-def predict(model, data):
-    predictions = []
-    with torch.no_grad():
-        for i in range(len(data)):
-            input_data = torch.tensor(data['standardized_input'].iloc[i]).float()
-            output = model(input_data)
-            predictions.append(output)
-    return predictions
 
 def standardize_data(data):
     temp_data = copy.deepcopy(data)
     for i in range(len(temp_data)):
         for j in range(len(temp_data[i])):
             while len(temp_data[i][j]) < 30:
-                temp_data[i][j].append(-1)
+                temp_data[i][j].append(11)
         while len(temp_data[i]) < 30:
-            temp_data[i].append([-1 for k in range(30)])
+            temp_data[i].append([11 for k in range(30)])
     return temp_data
 
 
