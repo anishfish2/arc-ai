@@ -3,3 +3,4 @@ arc-prize-2024/
 evaluation_challenges_data.csv
 test_challenges_data.csv
 train_challenges_data.csv
+.env
